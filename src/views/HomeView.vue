@@ -1,9 +1,18 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import { useCharactersStore } from '@/stores/characters'
+
+const charactersStore = useCharactersStore()
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <app-list/>
+    {{charactersStore.character}}
   </main>
 </template>
+
+<style>
+
+@media (max-width: 1024px) {}
+</style>
+
