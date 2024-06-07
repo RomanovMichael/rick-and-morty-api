@@ -1,13 +1,20 @@
-:root 
+:root {
+  --main-bg-color: rgb(39, 43, 51);
+  --color-white: rgb(245, 245, 245);
+  --color-gray: rgb(60, 62, 68);
+  --color-caption: rgb(158, 158, 158);
+  --color-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+}
 
 * {
   box-sizing: border-box;
 }
 
-body {
+html, body {
   margin: 0;
-  font-weight: normal;
   font-size: 16px;
+  font-weight: normal;
+  font-family: -apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";  
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -18,4 +25,8 @@ body {
   font-weight: normal;
   background-color: var(--main-bg-color);
   min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
 }
