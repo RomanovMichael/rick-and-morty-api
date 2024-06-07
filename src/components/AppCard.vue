@@ -1,26 +1,59 @@
-<script setup></script>
+<script setup>
+import { computed } from 'vue'
+import { useCharactersStore } from '@/stores/characters'
+
+const charactersStore = useCharactersStore()
+
+const props = defineProps({
+  item: {
+    type: Object,
+    required: true
+  }
+})
+
+const statusColor = computed(() => {
+  const flag = props.item.status.toLowerCase()
+  const colorKit = {
+    alive: 'rgb(85, 204, 68)',
+    dead : 'rgb(214, 61, 46)',
+    uknown: 'rgb(255, 255, 255)'
+  }
+
+  return colorKit[flag]
+})
+
+const checkEpisode = computed(()=> {
+  const itemEpisodes = props.item.episode
+  const firstItemEpisode = itemEpisodes[0]
+
+  const episode = charactersStore.episodes.find(el => el.url === firstItemEpisode )
+  return episode?.name
+}) 
+</script>
 
 <template>
-  <div class="app-card">
+  <div v-if="item" class="app-card">
     <div class="app-card__image">
       <div class="app-card__image-thumb">
         <picture>
-          <img src="https://rickandmortyapi.com/api/character/avatar/84.jpeg" alt="char">
+          <img :src="props.item.image" :alt="props.item.name">
         </picture>
       </div>
     </div>
     <div class="app-card__content">
       <div class="app-card__heading">
-        <h2 class="app-card__title">Cult Leader Morty</h2>
-        <div class="app-card__status"><span>Alive - Human</span></div>
+        <h2 v-if="props.item.name" class="app-card__title">{{props.item.name}}</h2>
+        <div class="app-card__status">
+          <span :style="{'backgroundColor': statusColor}" class="add-card__status-icon"></span>
+          <span>{{ props.item.status }} - {{ props.item.species }}</span></div>
       </div>
-      <div class="app-card__location app-card__location--last">
+      <div v-if="props.item.location.name" class="app-card__location app-card__location--last">
         <span class="app-card__location-caption">Last known location:</span>
-        <span class="app-card__location-value">Hideout Planet</span>
+        <span class="app-card__location-value">{{ props.item.location.name }}</span>
       </div>
-      <div class="app-card__location app-card__location--first">
+      <div v-if="checkEpisode" class="app-card__location app-card__location--first">
         <span class="app-card__location-caption">First seen in:</span>
-        <span class="app-card__location-value">Rattlestar Ricklactica</span>
+        <span class="app-card__location-value">{{checkEpisode}}</span>
       </div>
     </div>
   </div>
@@ -73,10 +106,24 @@
   font-size: 1.75rem;
 }
 
+.app-card__status {
+  display: flex;
+  align-items: center;
+}
+
 .app-card__status span {
+  display: block;
   color: var(--color-white);
   font-size: 1rem;
   line-height: 1.6rem;
+}
+
+.add-card__status-icon {
+  border-radius: 50%;
+  width: .6rem;
+  height: .6rem;
+  background-color: red;
+  margin-right: .325rem;
 }
 
 .app-card__locations {

@@ -7,6 +7,7 @@ const charactersStore = useCharactersStore()
 
 onMounted(() => {
   charactersStore.getCharacters()
+  charactersStore.getEpisodes()
 })
 </script>
 

@@ -3,7 +3,8 @@ import { defineStore } from 'pinia'
 
 export const useCharactersStore = defineStore('characters', () => {
   const BASE_URL = 'https://rickandmortyapi.com/api'
-  const characters = ref(null)
+  const characters = ref([])
+  const episodes = ref([])
 
   const getCharacters = async () => {
     try {
@@ -23,6 +24,25 @@ export const useCharactersStore = defineStore('characters', () => {
       console.log('function is done')
     }
   }
+
+  const getEpisodes = async () => {
+    try {
+      const response = await fetch(BASE_URL + '/episode')
+
+      if(response.ok) {
+        const data = await response.json()
+        console.log(data.results)
+
+        episodes.value = data.results
+      } else {
+        console.error('Promise resolved but HTTP status failed')
+      } 
+    } catch {
+      console.error('Promise rejected')
+    } finally {
+      console.log('function is done')
+    }
+  }
   
-  return { characters, getCharacters }
+  return { characters, episodes, getCharacters, getEpisodes }
 })
