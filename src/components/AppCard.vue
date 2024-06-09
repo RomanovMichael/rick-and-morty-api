@@ -148,5 +148,25 @@ const firstSeenEpisode = computed(()=> {
   font-size: 1.125rem;
   line-height: 1.875rem;
 }
+
+@media (max-width: 640px) {
+  .app-card {
+    flex-direction: column;
+  }
+
+  .app-card__image {
+    width: 100%;
+  }
+
+  .app-card__image-thumb {
+    padding-bottom: 85.95988538681948%;
+  }
+
+  .app-card__content {
+    min-height: 15rem;
+    padding: .75rem;
+  }
+
+}
 </style>
 

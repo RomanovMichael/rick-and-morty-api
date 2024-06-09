@@ -29,7 +29,7 @@ const resetFilters = () => {
 </script>
 
 <template>
-  <div class="app-filter">
+  <section class="app-filter">
     <div class="container">
       <div class="app-filter__search">
         <input v-model="charactersStore.filterParams.name" type="text" placeholder="Enter character name">
@@ -54,7 +54,7 @@ const resetFilters = () => {
         <button @click="changePage('nex')" :class="{'is-disabled' : !charactersStore.responsePagerInfo['next'] || charactersStore.errorMessage}">Next</button>
       </div>
     </div>  
-  </div>
+  </section>
 </template>
 
 <style>

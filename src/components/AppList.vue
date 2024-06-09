@@ -10,11 +10,11 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="app-list">
+  <section class="app-list">
     <div class="container">
       <app-card v-for="card in props.cards" :key="card.id" :item="card"/>
     </div>
-  </div>
+  </section>
 </template>
 
 <style>
@@ -27,11 +27,20 @@ const props = defineProps({
 @media (max-width: 1680px) {
   .app-list .container {
     grid-template-columns: 1fr 1fr;
-    }
+  }
 }
-@media (max-width: 1024px) {
+
+@media (max-width: 1199px) {
   .app-list .container {
+    max-width: 45rem;
     grid-template-columns: 1fr;
+    padding: 0 3rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-list .container {
+    padding: 0 2.55rem;
   }
 }
 </style>
