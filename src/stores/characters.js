@@ -7,6 +7,7 @@ export const useCharactersStore = defineStore('characters', () => {
   const episodes = ref([])
   const responsePagerInfo = ref({})
   const errorMessage = ref(null)
+  const isLoading = ref(false)
 
   const filterParams = ref({
     page: 1,
@@ -36,6 +37,7 @@ export const useCharactersStore = defineStore('characters', () => {
   const getCharacters = async () => {
     const params = new URLSearchParams(filterParams.value).toString()
     try {
+      isLoading.value = true 
       const response = await makeRequest({url: `/character/?${params}`})
       characters.value = response.results
       responsePagerInfo.value = response.info
@@ -45,6 +47,8 @@ export const useCharactersStore = defineStore('characters', () => {
       return response
     } catch(error) {
       errorMessage.value = error.response.data.error
+    } finally {
+      isLoading.value = false
     }
   }
 
@@ -67,6 +71,7 @@ export const useCharactersStore = defineStore('characters', () => {
     responsePagerInfo,
     filterParams, 
     statusOptionsList, 
-    errorMessage
+    errorMessage,
+    isLoading
   }
 })

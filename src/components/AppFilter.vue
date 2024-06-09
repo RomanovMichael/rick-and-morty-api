@@ -37,12 +37,12 @@ const resetFilters = () => {
       <div class="app-filter__status">
         <select v-model="charactersStore.filterParams.status" name="status" id="status">
           <option 
-          v-for="option in charactersStore.statusOptionsList" 
-          :key="option.label" 
-          :value="option.value"
+            v-for="option in charactersStore.statusOptionsList" 
+            :key="option.label" 
+            :value="option.value"
           >
           {{option.label}}
-        </option>
+          </option>
         </select>
       </div>
       <div class="app-filter__controls">
@@ -99,6 +99,5 @@ const resetFilters = () => {
     .app-filter__pager {
       margin-left: unset;
     }
-
   }
 </style>

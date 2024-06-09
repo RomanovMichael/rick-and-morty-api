@@ -3,6 +3,7 @@
   --color-white: rgb(245, 245, 245);
   --color-gray: rgb(60, 62, 68);
   --color-caption: rgb(158, 158, 158);
+  --color-orange: rgb(255, 152, 0);
   --color-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
@@ -29,4 +30,9 @@ html, body {
 
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
+}
+
+::selection {
+  color: var(--color-orange);
+  background-color: var(--main-bg-color);
 }
