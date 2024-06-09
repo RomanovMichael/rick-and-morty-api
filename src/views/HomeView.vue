@@ -1,20 +1,23 @@
 <script setup>
+import AppList from '@/components/AppList.vue'
+import AppFilter from '@/components/AppFilter.vue'
+
 import { useCharactersStore } from '@/stores/characters'
 import { onMounted } from 'vue'
-import AppList from '@/components/AppList.vue'
 
 const charactersStore = useCharactersStore()
 
 onMounted(() => {
-  charactersStore.getCharacters()
   charactersStore.getEpisodes()
+  charactersStore.getCharacters()
 })
 </script>
 
 <template>
   <main>
     <div class="container">
-      <AppList :cards="charactersStore.characters" class="app__list"/>
+      <app-filter />
+      <app-list :cards="charactersStore.characters" />
     </div>
   </main>
 </template>

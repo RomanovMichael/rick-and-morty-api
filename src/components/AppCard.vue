@@ -13,17 +13,18 @@ const props = defineProps({
 
 const statusColor = computed(() => {
   const flag = props.item.status.toLowerCase()
+  
   const colorKit = {
     alive: 'rgb(85, 204, 68)',
     dead : 'rgb(214, 61, 46)',
-    uknown: 'rgb(255, 255, 255)'
+    unknown: 'rgb(255, 255, 255)'
   }
 
-  return colorKit[flag]
+  return colorKit[flag] || colorKit.unknown
 })
 
-const checkEpisode = computed(()=> {
-  const itemEpisodes = props.item.episode
+const firstSeenEpisode = computed(()=> {
+  const itemEpisodes = props.item?.episode
   const firstItemEpisode = itemEpisodes[0]
 
   const episode = charactersStore.episodes.find(el => el.url === firstItemEpisode )
@@ -45,15 +46,16 @@ const checkEpisode = computed(()=> {
         <h2 v-if="props.item.name" class="app-card__title">{{props.item.name}}</h2>
         <div class="app-card__status">
           <span :style="{'backgroundColor': statusColor}" class="add-card__status-icon"></span>
-          <span>{{ props.item.status }} - {{ props.item.species }}</span></div>
+          <span>{{ props.item.status }} - {{ props.item.species }}</span>
+        </div>
       </div>
       <div v-if="props.item.location.name" class="app-card__location app-card__location--last">
         <span class="app-card__location-caption">Last known location:</span>
         <span class="app-card__location-value">{{ props.item.location.name }}</span>
       </div>
-      <div v-if="checkEpisode" class="app-card__location app-card__location--first">
+      <div v-if="firstSeenEpisode" class="app-card__location app-card__location--first">
         <span class="app-card__location-caption">First seen in:</span>
-        <span class="app-card__location-value">{{checkEpisode}}</span>
+        <span class="app-card__location-value">{{ firstSeenEpisode }}</span>
       </div>
     </div>
   </div>
