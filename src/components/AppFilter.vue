@@ -31,23 +31,74 @@ const resetFilters = () => {
 <template>
   <div class="app-filter">
     <div class="container">
-      <input v-model="charactersStore.filterParams.name" type="text" placeholder="Enter character name">
-      <button @click="setFilters()">Submit</button>
-      <button @click="resetFilters()">Reset filters</button>
-      <button @click="changePage('prev')" :class="{'is-disabled' : !charactersStore.responsePagerInfo['prev']}">Prev</button>
-      <button @click="changePage('nex')" :class="{'is-disabled' : !charactersStore.responsePagerInfo['next']}">Next</button>
-
+      <div class="app-filter__search">
+        <input v-model="charactersStore.filterParams.name" type="text" placeholder="Enter character name">
+      </div>
+      <div class="app-filter__status">
         <select v-model="charactersStore.filterParams.status" name="status" id="status">
           <option 
-            v-for="option in charactersStore.statusOptionsList" 
-            :key="option.label" 
-            :value="option.value"
+          v-for="option in charactersStore.statusOptionsList" 
+          :key="option.label" 
+          :value="option.value"
           >
-            {{option.label}}
-          </option>
+          {{option.label}}
+        </option>
         </select>
+      </div>
+      <div class="app-filter__controls">
+        <button @click="setFilters()">Submit</button>
+        <button @click="resetFilters()">Reset filters</button>
+      </div>
+      <div class="app-filter__pager">
+        <button @click="changePage('prev')" :class="{'is-disabled' : !charactersStore.responsePagerInfo['prev'] || charactersStore.errorMessage}">Prev</button>
+        <button @click="changePage('nex')" :class="{'is-disabled' : !charactersStore.responsePagerInfo['next'] || charactersStore.errorMessage}">Next</button>
+      </div>
     </div>  
   </div>
 </template>
 
-<style></style>
+<style>
+  .app-filter {
+    margin: 2rem 0;
+  }
+
+  .app-filter button, select {
+    cursor: pointer;
+  }
+
+  .app-filter .container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .app-filter__controls {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+
+  .app-filter__pager {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: .5rem;
+    margin-left: auto;
+  }
+
+  .app-filter__pager button.is-disabled {
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  @media (max-width: 1024px) {
+    .app-filter .container {
+      flex-direction: column;
+    }
+
+    .app-filter__pager {
+      margin-left: unset;
+    }
+
+  }
+</style>

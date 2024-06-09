@@ -32,6 +32,6 @@ const props = defineProps({
 @media (max-width: 1024px) {
   .app-list .container {
     grid-template-columns: 1fr;
-    }
+  }
 }
 </style>

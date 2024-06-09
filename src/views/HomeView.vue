@@ -18,19 +18,26 @@ onMounted(() => {
   <main>
     <app-promo />
     <app-filter />
-    <div v-if="charactersStore.errorMessage" class="error">
-    {{ charactersStore.errorMessage }}
+
+    <div v-if="charactersStore.errorMessage" class="error"> 
+      <div class="container">
+        {{ charactersStore.errorMessage }}
+      </div>
     </div>
+
     <app-list v-else :cards="charactersStore.characters" />
   </main>
 </template>
 
 <style>
   .container {
-    margin-top: 5rem;
     padding: 0 1rem;
     max-width: 120rem;
     margin: 0 auto;
+  }
+
+  .error {
+    color: var(--color-white);
   }
 
   @media (max-width: 1440px) {
