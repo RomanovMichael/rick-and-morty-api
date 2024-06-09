@@ -17,7 +17,10 @@ onMounted(() => {
   <main>
     <div class="container">
       <app-filter />
-      <app-list :cards="charactersStore.characters" />
+      <div v-if="charactersStore.errorMessage" class="error">
+      {{ charactersStore.errorMessage }}
+      </div>
+      <app-list v-else :cards="charactersStore.characters" />
     </div>
   </main>
 </template>

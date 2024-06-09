@@ -1,16 +1,17 @@
 <script setup>
 import AppCard from '@/components/AppCard.vue'
-  const props = defineProps({
-    cards: {
-      type: Array,
-      required: true
-    }
-  })
+
+const props = defineProps({
+  cards: {
+    type: Array,
+    required: true
+  }
+})
 </script>
 
 <template>
-  <div v-if="cards" class="app-list">
-    <app-card v-for="card in props.cards" :key="card" :item="card"/>
+  <div class="app-list">
+    <app-card v-for="card in props.cards" :key="card.id" :item="card"/>
   </div>
 </template>
 

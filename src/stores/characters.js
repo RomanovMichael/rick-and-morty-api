@@ -5,11 +5,13 @@ import { makeRequest } from '@/api'
 export const useCharactersStore = defineStore('characters', () => {
   const characters = ref([])
   const episodes = ref([])
-  const pager = ref(null)
+  const responsePagerInfo = ref({})
+  const errorMessage = ref(null)
 
   const filterParams = ref({
+    page: 1,
     name: '',
-    status: '',
+    status: ''
   })
 
   const statusOptionsList = ref([
@@ -31,19 +33,17 @@ export const useCharactersStore = defineStore('characters', () => {
     },
   ])
 
-
   const getCharacters = async () => {
     const params = new URLSearchParams(filterParams.value).toString()
-    // ?page=1&name=''&status=''
     try {
       const response = await makeRequest({url: `/character/?${params}`})
       characters.value = response.results
+      responsePagerInfo.value = response.info
+      errorMessage.value = null
 
-      pager.value = response.info
-      console.log(response.info)
       return response
     } catch(error) {
-      console.error(error)
+      errorMessage.value = error.response.data.error
     }
   }
 
@@ -58,46 +58,14 @@ export const useCharactersStore = defineStore('characters', () => {
     }
   }
 
-  const setPage = async (direction) => {
-    const params = new URLSearchParams(filterParams.value).toString()
-
-    const { data } = await makeRequest({url: `${pager.value[direction]}&${params}`})
-    characters.value = data.results
-    pager.value = data.info
-   
-    return data 
+  return {
+    getEpisodes,
+    getCharacters,
+    episodes,
+    characters,
+    responsePagerInfo,
+    filterParams, 
+    statusOptionsList, 
+    errorMessage
   }
-
-  const resetFilters = async () => {
-    filterParams.value['name'] = ''
-    filterParams.value['status'] = ''
-
-    const { data } = await makeRequest({url: `/character`})
-
-    characters.value = data.results
-    pager.value = data.info
-    return data
-  }
-
-  // const setPage = async (direction) => {
-  //   try {
-  //     const response = await fetch(apiInfo.value[direction])
-
-  //     if(response.ok) {
-  //       const data = await response.json()
-  //       console.log(data)
-
-  //       apiInfo.value = data.info
-  //       characters.value = data.results
-  //     } else {
-  //       console.error('Promise resolved but HTTP status failed')
-  //     } 
-  //   } catch {
-  //     console.error('Promise rejected')
-  //   } finally {
-  //     console.log('function is done')
-  //   }
-  // }
-
-  return { getCharacters, episodes, characters, filterParams, setPage, resetFilters, statusOptionsList, getEpisodes}
 })
