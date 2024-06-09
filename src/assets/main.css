@@ -7,6 +7,11 @@
   --color-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
 }
 
+::selection {
+  color: var(--color-orange);
+  background-color: var(--main-bg-color);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -28,11 +33,32 @@ html, body {
   min-height: 100vh;
 }
 
+main {
+  padding-bottom: 6rem;
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin: 0;
 }
 
-::selection {
-  color: var(--color-orange);
-  background-color: var(--main-bg-color);
+.container {
+  padding: 0 1rem;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+.error {
+  color: var(--color-white);
+}
+
+@media (max-width: 1440px) {
+  .container {
+    padding: 0 2rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 1rem;
+  }
 }

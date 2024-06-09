@@ -28,31 +28,3 @@ onMounted(() => {
     <app-list v-else :cards="charactersStore.characters" />
   </main>
 </template>
-
-<style>
-  main {
-    padding-bottom: 6rem;
-  }
-  .container {
-    padding: 0 1rem;
-    max-width: 120rem;
-    margin: 0 auto;
-  }
-
-  .error {
-    color: var(--color-white);
-  }
-
-  @media (max-width: 1440px) {
-    .container {
-      padding: 0 2rem;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    .container {
-      padding: 0 1rem;
-    }
-  }
-</style>
-

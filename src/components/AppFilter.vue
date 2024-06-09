@@ -50,8 +50,14 @@ const resetFilters = () => {
         <button @click="resetFilters()">Reset filters</button>
       </div>
       <div class="app-filter__pager">
-        <button @click="changePage('prev')" :class="{'is-disabled' : !charactersStore.responsePagerInfo['prev'] || charactersStore.errorMessage}">Prev</button>
-        <button @click="changePage('nex')" :class="{'is-disabled' : !charactersStore.responsePagerInfo['next'] || charactersStore.errorMessage}">Next</button>
+        <button 
+          @click="changePage('prev')" 
+          :class="{'is-disabled' : !charactersStore.responsePagerInfo['prev'] || charactersStore.errorMessage}"
+        >Prev</button>
+        <button
+          @click="changePage('nex')" 
+          :class="{'is-disabled' : !charactersStore.responsePagerInfo['next'] || charactersStore.errorMessage}"
+        >Next</button>
       </div>
     </div>  
   </section>
