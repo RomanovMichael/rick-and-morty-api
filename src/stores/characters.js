@@ -40,6 +40,7 @@ export const useCharactersStore = defineStore('characters', () => {
       characters.value = response.results
       responsePagerInfo.value = response.info
       errorMessage.value = null
+      console.log(characters.value)
 
       return response
     } catch(error) {

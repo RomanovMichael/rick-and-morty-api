@@ -1,6 +1,7 @@
 <script setup>
-import AppList from '@/components/AppList.vue'
+import AppPromo from '@/components/AppPromo.vue'
 import AppFilter from '@/components/AppFilter.vue'
+import AppList from '@/components/AppList.vue'
 
 import { useCharactersStore } from '@/stores/characters'
 import { onMounted } from 'vue'
@@ -15,13 +16,12 @@ onMounted(() => {
 
 <template>
   <main>
-    <div class="container">
-      <app-filter />
-      <div v-if="charactersStore.errorMessage" class="error">
-      {{ charactersStore.errorMessage }}
-      </div>
-      <app-list v-else :cards="charactersStore.characters" />
+    <app-promo />
+    <app-filter />
+    <div v-if="charactersStore.errorMessage" class="error">
+    {{ charactersStore.errorMessage }}
     </div>
+    <app-list v-else :cards="charactersStore.characters" />
   </main>
 </template>
 

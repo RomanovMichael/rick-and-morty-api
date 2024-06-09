@@ -25,9 +25,9 @@ const statusColor = computed(() => {
 
 const firstSeenEpisode = computed(()=> {
   const itemEpisodes = props.item?.episode
-  const firstItemEpisode = itemEpisodes[0]
+  const firstEpisodeUrl = itemEpisodes[0]
 
-  const episode = charactersStore.episodes.find(el => el.url === firstItemEpisode )
+  const episode = charactersStore.episodes.find(el => el.url === firstEpisodeUrl )
   return episode?.name
 }) 
 </script>
